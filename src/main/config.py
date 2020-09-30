@@ -1,6 +1,6 @@
 
-DEVELOPMENT = 0  # 개발 중일때 사용
-RUN = 10 # 개발 끝나고 사용
+DEVELOPMENT = 0  # Used in Development
+RUN = 10 # Use After Development
 
 # PROGRAM_STATUS = RUN
 PROGRAM_STATUS = DEVELOPMENT

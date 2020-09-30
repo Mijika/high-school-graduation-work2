@@ -15,6 +15,9 @@ SERVO_MAX_DUTY = 12
 SERVO_MIN_DUTY = 3
 
 class ServoMotortController:
+	"""Class controlling two servomotor
+
+	"""
 	def __init__(self):
 		self.servo1 = None
 		self.servo2 = None
@@ -27,6 +30,10 @@ class ServoMotortController:
 		GPIO.cleanup()
 
 	def setup_servo_moter(self):
+		"""setup servo moter
+
+
+		"""
 		GPIO.setmode(GPIO.BOARD)
 		GPIO.setwarnings(False) # gpio warning disable
 
@@ -40,16 +47,24 @@ class ServoMotortController:
 		self.servo2.start(0)
 
 	def setServoPos(self, degree):
-		# 각도는 180도를 넘을 수 없다.
+		"""Specify angle of servomotor
+
+		Arguments:
+			degree {int} -- specify degree
+		"""
+
+		# cannot exceed 180 degrees.
 		if degree > 180:
 			degree = 180
+		# cannot be less than 0 degrees.
+		if degree < 0:
+			degree = 0
 
-		# 각도(degree)를 duty로 변경한다.
+		# change the degree to duty
 		duty = SERVO_MIN_DUTY+(degree*(SERVO_MAX_DUTY-SERVO_MIN_DUTY)/180.0)
-		# duty 값 출력
-		logger.info("Degree: {} to {}(Duty)".format(degree, duty))
+		logger.debug("Degree: {} to {}(Duty)".format(degree, duty))
 
-		# 변경된 duty값을 서보 pwm에 적용
+		# Apply Value
 		self.servo1.ChangeDutyCycle(duty)
 		self.servo2.ChangeDutyCycle(duty)
 

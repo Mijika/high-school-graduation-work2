@@ -1,7 +1,5 @@
 import os
 from time import sleep
-import platform
-import logging
 
 from utils.custom_logger import Logger
 from servo_controller import ServoMotortController
