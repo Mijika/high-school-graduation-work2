@@ -1,53 +1,26 @@
-import time
 import os
+from time import sleep
 import platform
+import logging
 
-import utils.custom_logger
+from utils.custom_logger import Logger
+from servo_controller import ServoMotortController
 
-
-DEVELOPMENT = 0  # 개발 중일때 사용
-RUN = 10 # 개발 끝나고 사용
-
-if platform.system() == "Windows":
-	DEIVER_PATH = './chromedriver.exe'
-elif platform.system() == "Linux":
-	import RPi.GPIO as GPIO
+logger = Logger(__name__)
 
 
+def main():
+    sleep(1)
+    servo_controller = ServoMotortController()
+    servo_controller.setup_servo_moter()
+    servo_controller.setServoPos(100)
 
-def is_system_on():
+    try:
+        while True:
+            pass
 
+    except KeyboardInterrupt:
+        logger.info(' program close')
 
-while True():
-
-	time.slepp(0.1)
-
-
-
-
-if __name__ == "__main__":
-	pass
-
-
-import RPi.GPIO as GPIO
-import time
-
-GPIO.setmode(GPIO.BCM)
-
-GPIO.setup(6, GPIO.OUT)
-GPIO.setup(21, GPIO.IN)
-
-try:
-    while True:
-        inputIO = GPIO.input(21)
-
-        if inputIO == False:
-            GPIO.output(6, GPIO.HIGH)
-            #time.sleep(1)
-
-        else:
-            GPIO.output(6, GPIO.LOW)
-            #time.sleep(1)
-
-except KeyboardInterrupt:
-    GPIO.cleanup()
+if __name__ == '__main__':
+    main()
