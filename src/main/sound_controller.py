@@ -10,10 +10,10 @@ import os
 class SoundController:
     def __init__(self):
         self.chunk = 1024
-    
+
     def soundPlay(self, sound_file, sound_file_info):
         p = pyaudio.PyAudio()
-        
+
         stream = p.open(format=p.get_format_from_width(sound_file_info[0]),
                 channels=sound_file_info[1],
                 rate=sound_file_info[2],
@@ -27,7 +27,7 @@ class SoundController:
 
         p.terminate()
 
-    
+
     def randomSound(self):
         pass
 
@@ -43,13 +43,13 @@ class SoundFileLoder:
         wf = wave.open(os.path.join("./sound_file", file_name), 'rb')
 
         sound_file =  []
-        chunk = wf.readframes(self.chunk) 
-        sound_file.append(chunk) 
+        chunk = wf.readframes(self.chunk)
+        sound_file.append(chunk)
 
         while len(chunk) > 0:
             sound_file.append(chunk)
-            chunk = wf.readframes(self.chunk) 
-            
+            chunk = wf.readframes(self.chunk)
+
         wf.close()
 
         return sound_file
@@ -77,7 +77,7 @@ class SoundFileLoder:
 
 
 if __name__ == "__main__":
-    
+
     sound_file_loder = SoundFileLoder()
     sound_controller = SoundController()
 
@@ -87,5 +87,5 @@ if __name__ == "__main__":
     sound_controller.soundPlay(sound_file, sound_file_info)
 
     # print(sound_file_loder.file_name_ck("test.wav"))
-    # print(sound_file_loder.soundLode("test.wav")) 
+    # print(sound_file_loder.soundLode("test.wav"))
 
